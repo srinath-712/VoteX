@@ -2,12 +2,14 @@ import { appTranslations } from './app.translations';
 import { pollingTranslations } from './polling.translations';
 import { journeyTranslations } from './journey.translations';
 import { checklistTranslations } from './checklist.translations';
+import { guideTranslations } from './guide.translations';
 
 export const translations = {
   app: appTranslations,
   polling: pollingTranslations,
   journey: journeyTranslations,
   checklist: checklistTranslations,
+  guide: guideTranslations,
 };
 
 // Helper function to easily get a localized string,
