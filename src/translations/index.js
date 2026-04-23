@@ -1,10 +1,12 @@
 import { appTranslations } from './app.translations';
 import { pollingTranslations } from './polling.translations';
+import { journeyTranslations } from './journey.translations';
 // We will import and merge other translations here as they are created
 
 export const translations = {
   app: appTranslations,
   polling: pollingTranslations,
+  journey: journeyTranslations,
 };
 
 // Helper function to easily get a localized string,
