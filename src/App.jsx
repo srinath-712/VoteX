@@ -4,6 +4,8 @@ import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import BottomNav from './components/layout/BottomNav';
 
+import ChatButton from './features/chat/ChatButton';
+
 // Lazy loaded pages
 const JourneyPage = React.lazy(() => import('./pages/JourneyPage'));
 const GuidePage = React.lazy(() => import('./pages/GuidePage'));
@@ -43,6 +45,7 @@ function App() {
         </div>
         
         <BottomNav />
+        <ChatButton />
       </div>
     </HashRouter>
   );
