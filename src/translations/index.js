@@ -6,6 +6,7 @@ import { guideTranslations } from './guide.translations';
 import { chatTranslations } from './chat.translations';
 import { timelineTranslations } from './timeline.translations';
 import { simulatorTranslations } from './simulator.translations';
+import { learnTranslations } from './learn.translations';
 
 export const translations = {
   app: appTranslations,
@@ -16,6 +17,7 @@ export const translations = {
   chat: chatTranslations,
   timeline: timelineTranslations,
   simulator: simulatorTranslations,
+  learn: learnTranslations,
 };
 
 // Helper function to easily get a localized string,
