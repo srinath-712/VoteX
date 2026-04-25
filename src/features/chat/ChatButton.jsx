@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ChatPanel from './ChatPanel';
 import { MessageSquare } from 'lucide-react';
 

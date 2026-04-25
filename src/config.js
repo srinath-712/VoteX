@@ -1,5 +1,7 @@
 export const ELECTION_CONFIG = {
-  // ISO Date format for the main election day (YYYY-MM-DD)
+  // ⚠️  UPDATE THIS BEFORE EACH ELECTION CYCLE  ⚠️
+  // Set to the main polling day in ISO format (YYYY-MM-DD).
+  // The timeline auto-selects the "current" phase based on how many days remain until this date.
   CURRENT_ELECTION_DATE: "2026-05-15",
   
   // Can explicitly override the automatic timeline phase (1-8) for testing

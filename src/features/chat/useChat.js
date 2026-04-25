@@ -59,15 +59,14 @@ export function useChat() {
                     )
                   );
                 }
-              } catch (e) {
-                console.error('SSE parsing error', e);
+              } catch (_e) {
+                // Ignore malformed SSE chunks
               }
             }
           }
         }
       }
     } catch (err) {
-      console.error('Chat error:', err);
       setError(err.message);
       // Remove empty assistant message on error
       setMessages((prev) => prev.filter(msg => msg.id !== assistantMessageId || msg.content.length > 0));

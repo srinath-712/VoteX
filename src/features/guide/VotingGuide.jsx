@@ -98,9 +98,13 @@ const VotingGuide = () => {
 
   const currentStep = activeSteps[currentIndex];
   // Replaces {{current}} and {{total}} manually since we don't have an interpolator here yet
-  const progressText = t('progress')
-    .replace('{{current}}', currentIndex + 1)
-    .replace('{{total}}', activeSteps.length);
+  const progressText = getTranslation('guide.hero.progress', language, {
+    current: currentIndex + 1,
+    total: activeSteps.length,
+  }) || getTranslation('guide.hero.progress', 'en', {
+    current: currentIndex + 1,
+    total: activeSteps.length,
+  });
 
   return (
     <div className="max-w-2xl mx-auto flex flex-col" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>

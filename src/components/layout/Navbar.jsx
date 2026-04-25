@@ -14,7 +14,7 @@ const Navbar = () => {
           </div>
           <div className="flex items-center space-x-4">
             <div className="hidden md:block text-sm text-gray-600">
-              {getTranslation('app.progress', language, { current: 1, total: 6 })['en'] || getTranslation('app.progress', language, { current: 1, total: 6 })}
+              {getTranslation('app.appName', language) || 'VoteX'}
             </div>
             <select
               value={language}

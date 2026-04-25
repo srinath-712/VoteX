@@ -3,7 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../translations';
 import { useChat } from './useChat';
 import ChatMessage from './ChatMessage';
-import { X, Send, AlertCircle, RefreshCw } from 'lucide-react';
+import { X, Send, AlertCircle, RefreshCw, Sparkles } from 'lucide-react';
 
 const ChatPanel = ({ onClose }) => {
   const { language } = useLanguage();
@@ -105,7 +105,13 @@ const ChatPanel = ({ onClose }) => {
             <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
               <p className="font-medium mb-1">{t('error')}</p>
-              <button className="flex items-center text-red-700 hover:underline font-semibold text-xs" onClick={() => sendMessage(messages[messages.length-1].content)}>
+              <button
+                className="flex items-center text-red-700 hover:underline font-semibold text-xs"
+                onClick={() => {
+                  const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
+                  if (lastUserMsg) sendMessage(lastUserMsg.content);
+                }}
+              >
                 <RefreshCw className="w-3 h-3 mr-1" /> {t('retry')}
               </button>
             </div>

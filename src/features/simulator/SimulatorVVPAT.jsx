@@ -81,13 +81,6 @@ const SimulatorVVPAT = ({ selectedCandidate, isPrinting, onPrintComplete }) => {
          <div className="absolute w-2 h-2 rounded-full bg-gray-400 top-2 right-2"></div>
          <div className="text-xs text-gray-500 font-mono uppercase tracking-widest font-bold opacity-50">Sealed Drop Box</div>
       </div>
-
-      <style jsx="true">{`
-        @keyframes slideDown {
-          0% { top: -100px; opacity: 0; }
-          100% { top: 20px; opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 };

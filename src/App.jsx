@@ -39,6 +39,7 @@ function App() {
                 <Route path="/simulator" element={<SimulatorPage />} />
                 <Route path="/learn" element={<LearnPage />} />
                 <Route path="/polling" element={<PollingBoothPage />} />
+                <Route path="*" element={<Navigate to="/journey" replace />} />
               </Routes>
             </Suspense>
           </main>

@@ -1,17 +1,20 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+// Languages with complete translations. Add more here as translation files are completed.
+// Full list target: hi, ta, te, bn, mr, gu, kn, ml, or, pa
 const supportedLanguages = [
   { code: 'en', label: 'English' },
-  { code: 'hi', label: 'Hindi' },
-  { code: 'ta', label: 'Tamil' },
-  { code: 'te', label: 'Telugu' },
-  { code: 'bn', label: 'Bengali' },
-  { code: 'mr', label: 'Marathi' },
-  { code: 'gu', label: 'Gujarati' },
-  { code: 'kn', label: 'Kannada' },
-  { code: 'ml', label: 'Malayalam' },
-  { code: 'or', label: 'Odia' },
-  { code: 'pa', label: 'Punjabi' },
+  { code: 'hi', label: 'हिन्दी (Hindi)' },
+  // Translations coming soon:
+  // { code: 'ta', label: 'Tamil' },
+  // { code: 'te', label: 'Telugu' },
+  // { code: 'bn', label: 'Bengali' },
+  // { code: 'mr', label: 'Marathi' },
+  // { code: 'gu', label: 'Gujarati' },
+  // { code: 'kn', label: 'Kannada' },
+  // { code: 'ml', label: 'Malayalam' },
+  // { code: 'or', label: 'Odia' },
+  // { code: 'pa', label: 'Punjabi' },
 ];
 
 const LanguageContext = createContext();

@@ -57,7 +57,7 @@ const Checklist = () => {
         setTimeout(() => setCopied(false), 2000);
       }
     } catch (err) {
-      console.log('Share failed', err);
+      // User cancelled share or clipboard not available — no action needed
     }
   };
 
