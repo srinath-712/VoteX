@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../translations';
-import { Map, BookOpen, CheckSquare, Clock, MonitorPlay, GraduationCap, MapPin } from 'lucide-react';
+import { Map, BookOpen, CheckSquare, Clock, MonitorPlay, GraduationCap, MapPin, Settings as SettingsIcon } from 'lucide-react';
 
 const navItems = [
   { to: '/journey',   icon: Map,         labelPath: 'app.nav.journey',     desc: 'Your voting path' },
@@ -58,6 +58,30 @@ const Sidebar = () => {
           <p className="text-xs font-semibold text-indigo-700">Every vote matters</p>
           <p className="text-2xs text-gray-500 mt-0.5">Make yours count 🗳️</p>
         </div>
+      </div>
+      {/* Settings link */}
+      <div className="px-3 pb-3 border-t border-black/[0.05] pt-3">
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            `group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+              isActive
+                ? 'bg-indigo-50 text-primary shadow-[0_0_0_1px_rgba(99,102,241,0.15)]'
+                : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100/80'
+            }`
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <span className={`flex items-center justify-center w-7 h-7 rounded-lg transition-all duration-200 ${
+                isActive ? 'bg-primary text-white shadow-glow' : 'bg-gray-100 text-gray-500 group-hover:bg-gray-200 group-hover:text-gray-700'
+              }`}>
+                <SettingsIcon className="w-3.5 h-3.5" />
+              </span>
+              <span>Settings</span>
+            </>
+          )}
+        </NavLink>
       </div>
     </aside>
   );

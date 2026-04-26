@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../translations';
-import { Map, BookOpen, CheckSquare, GraduationCap, MoreHorizontal, Clock, MonitorPlay, MapPin, X } from 'lucide-react';
+import { Map, BookOpen, CheckSquare, GraduationCap, MoreHorizontal, Clock, MonitorPlay, MapPin, Settings, X } from 'lucide-react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 const mainItems = [
@@ -16,6 +16,7 @@ const moreItems = [
   { to: '/timeline',  icon: Clock,        labelPath: 'app.nav.timeline'    },
   { to: '/simulator', icon: MonitorPlay,  labelPath: 'app.nav.simulator'   },
   { to: '/polling',   icon: MapPin,       labelPath: 'app.nav.pollingBooth'},
+  { to: '/settings',  icon: Settings,     labelPath: 'app.nav.more',       override: 'Settings' },
 ];
 
 const BottomNav = () => {
@@ -100,7 +101,7 @@ const BottomNav = () => {
                     }`}>
                       <Icon className="w-3.5 h-3.5" />
                     </span>
-                    {getLabel(item.labelPath)}
+                    {item.override ?? getLabel(item.labelPath)}
                   </DropdownMenu.Item>
                 );
               })}
