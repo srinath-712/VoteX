@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import compression from 'compression';
 
 dotenv.config();
 
@@ -18,7 +20,12 @@ const chatLimiter = rateLimit({
   message: { error: 'Too many requests, please slow down and try again shortly.' },
 });
 
-// ── CORS ──────────────────────────────────────────────────────────────────
+// ── CORS & Security Middleware ──────────────────────────────────────────────
+app.use(helmet({
+  contentSecurityPolicy: false, // Vite/React needs inline scripts in dev
+}));
+app.use(compression());
+
 app.use(cors({
   origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
 }));

@@ -2,37 +2,33 @@ import React, { useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { getTranslation } from '../../translations';
-import { Map, BookOpen, CheckSquare, GraduationCap, Menu, X, Clock, MonitorPlay, MapPin } from 'lucide-react';
+import { Map, BookOpen, CheckSquare, GraduationCap, MoreHorizontal, Clock, MonitorPlay, MapPin, X } from 'lucide-react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+
+const mainItems = [
+  { to: '/journey',   icon: Map,          labelPath: 'app.nav.journey'   },
+  { to: '/guide',     icon: BookOpen,     labelPath: 'app.nav.guide'     },
+  { to: '/checklist', icon: CheckSquare,  labelPath: 'app.nav.checklist' },
+  { to: '/learn',     icon: GraduationCap,labelPath: 'app.nav.learn'     },
+];
+
+const moreItems = [
+  { to: '/timeline',  icon: Clock,        labelPath: 'app.nav.timeline'    },
+  { to: '/simulator', icon: MonitorPlay,  labelPath: 'app.nav.simulator'   },
+  { to: '/polling',   icon: MapPin,       labelPath: 'app.nav.pollingBooth'},
+];
 
 const BottomNav = () => {
   const { language } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const getLabel = (path) => {
-    const map = getTranslation(path, language);
-    return typeof map === 'string' ? map : map[language] || map['en'];
-  };
-
-  const mainItems = [
-    { to: "/journey", icon: Map, labelPath: "app.nav.journey" },
-    { to: "/guide", icon: BookOpen, labelPath: "app.nav.guide" },
-    { to: "/checklist", icon: CheckSquare, labelPath: "app.nav.checklist" },
-    { to: "/learn", icon: GraduationCap, labelPath: "app.nav.learn" },
-  ];
-
-  const moreItems = [
-    { to: "/timeline", icon: Clock, labelPath: "app.nav.timeline" },
-    { to: "/simulator", icon: MonitorPlay, labelPath: "app.nav.simulator" },
-    { to: "/polling", icon: MapPin, labelPath: "app.nav.pollingBooth" },
-  ];
-
+  const getLabel = (path) => getTranslation(path, language);
   const isMoreActive = moreItems.some(item => location.pathname === item.to);
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 pb-safe z-50">
-      <div className="flex justify-around items-center h-16">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 glass border-t border-black/[0.06] shadow-up pb-safe">
+      <div className="flex justify-around items-center h-16 px-1">
         {mainItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -40,47 +36,73 @@ const BottomNav = () => {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center w-full h-full space-y-1 ${
-                  isActive ? 'text-primary' : 'text-gray-500 hover:text-gray-900'
+                `relative flex flex-col items-center justify-center gap-1 flex-1 h-full transition-all duration-200 ${
+                  isActive ? 'text-primary' : 'text-gray-400 hover:text-gray-700'
                 }`
               }
             >
-              <Icon className="w-6 h-6" />
-              <span className="text-[10px] uppercase font-semibold tracking-wider">
-                {getLabel(item.labelPath)}
-              </span>
+              {({ isActive }) => (
+                <>
+                  <span className={`flex items-center justify-center w-8 h-8 rounded-xl transition-all duration-200 ${
+                    isActive ? 'bg-indigo-50 shadow-[0_0_0_1.5px_rgba(99,102,241,0.2)]' : ''
+                  }`}>
+                    <Icon className="w-4 h-4" strokeWidth={isActive ? 2.5 : 2} />
+                  </span>
+                  <span className="text-[9px] font-semibold tracking-wider uppercase leading-none">
+                    {getLabel(item.labelPath)}
+                  </span>
+                  {isActive && (
+                    <span className="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+                  )}
+                </>
+              )}
             </NavLink>
           );
         })}
 
+        {/* More dropdown */}
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
-            <button className={`flex flex-col items-center justify-center w-full h-full space-y-1 outline-none ${isMoreActive ? 'text-primary' : 'text-gray-500 hover:text-gray-900'}`}>
-               <Menu className="w-6 h-6" />
-               <span className="text-[10px] uppercase font-semibold tracking-wider">{getLabel('app.nav.more')}</span>
+            <button className={`relative flex flex-col items-center justify-center gap-1 flex-1 h-full outline-none transition-all duration-200 ${
+              isMoreActive ? 'text-primary' : 'text-gray-400 hover:text-gray-700'
+            }`}>
+              <span className={`flex items-center justify-center w-8 h-8 rounded-xl transition-all duration-200 ${isMoreActive ? 'bg-indigo-50' : ''}`}>
+                <MoreHorizontal className="w-4 h-4" />
+              </span>
+              <span className="text-[9px] font-semibold tracking-wider uppercase leading-none">
+                {getLabel('app.nav.more')}
+              </span>
             </button>
           </DropdownMenu.Trigger>
-          
+
           <DropdownMenu.Portal>
-            <DropdownMenu.Content 
-              className="bg-white rounded-card shadow-lg border border-gray-100 p-2 mb-2 w-48 animate-in fade-in zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95"
-              sideOffset={5}
+            <DropdownMenu.Content
+              className="glass border border-black/[0.07] rounded-2xl shadow-card p-2 mb-3 w-52 animate-slide-up-fade origin-bottom-right"
+              sideOffset={8}
               align="end"
             >
+              <p className="px-3 py-1.5 text-2xs text-gray-400 font-semibold uppercase tracking-widest">More pages</p>
               {moreItems.map((item) => {
-                 const Icon = item.icon;
-                 return (
-                   <DropdownMenu.Item
-                     key={item.to}
-                     onSelect={() => navigate(item.to)}
-                     className={`flex items-center px-3 py-3 text-sm rounded-btn cursor-pointer outline-none ${
-                        location.pathname === item.to ? 'bg-blue-50 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:bg-gray-50'
-                     }`}
-                   >
-                     <Icon className="w-5 h-5 mr-3" />
-                     {getLabel(item.labelPath)}
-                   </DropdownMenu.Item>
-                 )
+                const Icon = item.icon;
+                const isActive = location.pathname === item.to;
+                return (
+                  <DropdownMenu.Item
+                    key={item.to}
+                    onSelect={() => navigate(item.to)}
+                    className={`flex items-center gap-3 px-3 py-2.5 text-sm rounded-xl cursor-pointer outline-none transition-all duration-150 ${
+                      isActive
+                        ? 'bg-indigo-50 text-primary font-semibold'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    }`}
+                  >
+                    <span className={`flex items-center justify-center w-7 h-7 rounded-lg ${
+                      isActive ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
+                    }`}>
+                      <Icon className="w-3.5 h-3.5" />
+                    </span>
+                    {getLabel(item.labelPath)}
+                  </DropdownMenu.Item>
+                );
               })}
             </DropdownMenu.Content>
           </DropdownMenu.Portal>
